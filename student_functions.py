@@ -25,35 +25,18 @@ def DFS(matrix, start, end):
    
     path=[]
     visited={}
-    stack = []
-    stack.append(start)
-    path.append(start)
-    while(len(stack) > 0):
+    while(len(path) > 0):
         count = 0
-        node = stack[-1]
+        node = path[-1]
         for j in range(len(matrix)):
             if(matrix[node][j] > 0 and not j in visited.keys()):
                 visited[j] = node
-                stack.append(j)
                 path.append(j)
                 break
             else:
                 count+=1
         if(count == len(matrix)):
-            stack.pop()
-    # path.append(start)
-    # while(len(path) > 0):
-    #     count = 0
-    #     node = path[-1]
-    #     for j in range(len(matrix)):
-    #         if(matrix[node][j] > 0 and not j in visited.keys()):
-    #             visited[j] = node
-    #             path.append(j)
-    #             break
-    #         else:
-    #             count+=1
-    #     if(count == len(matrix)):
-    #         path.pop()
+            path.pop()
     return visited, path
 
 def BFS(matrix, start, end):
