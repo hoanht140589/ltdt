@@ -25,6 +25,7 @@ def DFS(matrix, start, end):
    
     path=[]
     visited={}
+    path.append(start)
     while(len(path) > 0):
         count = 0
         node = path[-1]
