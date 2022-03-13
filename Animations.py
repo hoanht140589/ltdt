@@ -1,6 +1,7 @@
 from Graphs import initialize, generateFigure, getRawData, readMatrix, np
 from Colors import *
 from student_functions import DFS, BFS, UCS, GBFS, Astar
+# import matplotlib.pyplot as plt # Need this ?
 import pygame
 from pygame.locals import *
 pygame.init()
@@ -19,10 +20,11 @@ def drawFig(raw_data, size):
     screen.blit(surf, (0,0))
     pygame.display.flip()
 
-def update(G, color_map, pos, t):
-   
+# def update(G, color_map, pos, t):
+def update(G, color_map, pos):
+    # Remove t param
     fig = generateFigure(G, color_map, pos)
-    plt.savfig(t+".svg")
+    # plt.savfig(t+".svg") # Wrong syntax
     raw_data, size= getRawData(fig)
     drawFig(raw_data,size)
     pygame.display.update()
@@ -45,11 +47,13 @@ def searchAnimation(matrix, visited, G, pos, color_map, t):
         for node in queue_nodes:
             if node not in tmp:
                 color_map[node]=queue_color
-        update(G, pos, color_map, t)
+        # update(G, pos, color_map, t)
+        update(G, pos, color_map)
         t +=1
         color_map[cur_node]=visited_color
         tmp.append(cur_node)
-        update(G, pos, color_map, t)
+        # update(G, pos, color_map, t)
+        update(G, pos, color_map)
         t+=1
 
 
@@ -80,11 +84,11 @@ def run(input, algorithm, delay):
         visited, path  = Astar(matrix, start, end, pos)
     else:
         print("Pass a search algorithm to run program.")
-    
     t=1
-
-    searchAnimation(matrix, visited, G, pos, color_map)
-    paintPath(path, G, pos, color_map, t)
+    # print("Visisted: %",visited)
+    # print("path: %",path)
+    searchAnimation(matrix, visited, G, pos, color_map, t)
+    paintPath(path, G, pos, color_map)
     while True:
         quit_event()
     
