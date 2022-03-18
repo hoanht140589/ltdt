@@ -22,7 +22,7 @@ def drawFig(raw_data, size):
 def update(G, color_map, pos, t):
    
     fig = generateFigure(G, color_map, pos)
-    plt.savfig(t+".svg")
+    # plt.savfig(t+".svg")
     raw_data, size= getRawData(fig)
     drawFig(raw_data,size)
     pygame.display.update()
@@ -66,8 +66,9 @@ def run(input, algorithm, delay):
     time_delay=delay
     matrix, start, end=readMatrix(input)
     G, pos, color_map=initialize(matrix)
-    update(G, pos, color_map)
     t = 1
+    update(G, pos, color_map,t)
+    # t = 1
     if algorithm == 'bfs':
         visited, path = BFS(matrix, start, end)
     elif algorithm == 'dfs':
@@ -83,7 +84,7 @@ def run(input, algorithm, delay):
     
     t=1
 
-    searchAnimation(matrix, visited, G, pos, color_map)
+    searchAnimation(matrix, visited, G, pos, color_map,t)
     paintPath(path, G, pos, color_map, t)
     while True:
         quit_event()
